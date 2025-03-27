@@ -1,0 +1,5 @@
+ - Responsive cards in hand
+ - Position of cards in hand
+ - Scroll in hand
+ - Number of cards in each zone
+ - Drag and Drop
