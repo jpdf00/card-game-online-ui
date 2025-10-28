@@ -23,6 +23,6 @@ const config = {
         Game,
         GameOver
     ]
-};
+}
 
 export default config

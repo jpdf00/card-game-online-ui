@@ -3,15 +3,15 @@ export default class BoardRegion extends Phaser.GameObjects.Container {
     super(scene, x, y)
   }
 
-  buildRegion() {
+  buildRegion(board) {
     this.addGroup()
     this.addZone()
-    this.addCardBack()
+    this.addCardBack(board)
     this.addCards()
   }
 
-  render() {
-    this.setSize()
+  render(board) {
+    this.setSize(board)
     this.renderGraphics()
   }
 
@@ -35,6 +35,8 @@ export default class BoardRegion extends Phaser.GameObjects.Container {
   addCardBack() {}
 
   addCards() {}
+
+  addContainer(_board) {}
 
   addLabel() {
     if (this.label) {

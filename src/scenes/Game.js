@@ -9,20 +9,61 @@ export class Game extends Scene {
   Init() {}
 
   create() {
+    const totalPlayers = 6
+
     const boardArgs = {
       scene: this,
       x: 0,
       y: 0,
       width: this.game.canvas.width,
-      height: this.game.canvas.height
+      height: this.game.canvas.height,
+      totalPlayers
     }
 
-    this.board = new Board(boardArgs)
+    let board = 1
 
-    this.board.createRegions()
+    do {
+      boardArgs.board = board
+
+      this[`board${board}`] = new Board(boardArgs)
+
+      this[`board${board}`].createRegions(board)
+
+      board += 1
+    } while (board <= totalPlayers)
+
+    const previewX =
+      this.game.canvas.width -
+      this.game.canvas.width * 0.125 +
+      (this.game.canvas.width * 0.125) / 2
+
+    const previewY = (this.game.canvas.width * 0.125 * 1.4) / 2
+
+    this.preview = this.add.image(previewX, previewY, '')
+
+    this.preview.setActive(false).setVisible(false)
 
     this.scale.on('resize', (canvasSize) => {
-      this.board.resize(canvasSize)
+      const { width, height } = canvasSize
+
+      const previewX = width - width * 0.125 + (width * 0.125) / 2
+
+      const previewY = (width * 0.125 * 1.4) / 2
+
+      this.preview.setX(previewX)
+      this.preview.setY(previewY)
+
+      const boardArgsResize = { x: 0, y: 0, width, height, totalPlayers }
+
+      board = 1
+
+      do {
+        boardArgsResize.board = board
+
+        this[`board${board}`].resize(boardArgsResize)
+
+        board += 1
+      } while (board <= totalPlayers)
     })
 
     // this.input.once('pointerdown', () => {

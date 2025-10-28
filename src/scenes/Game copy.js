@@ -3,7 +3,7 @@ import Board from '../board/Board'
 
 export class Game extends Scene {
   constructor() {
-    super('Game')
+    super('GameCopy')
   }
 
   Init() {}
